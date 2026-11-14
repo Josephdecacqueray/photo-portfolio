@@ -1,0 +1,96 @@
+@import "tailwindcss";
+
+@theme {
+  --font-serif: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+  --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+}
+
+:root,
+[data-theme="dark"] {
+  --bg-primary: #09090b;
+  --bg-surface: #121215;
+  --bg-elevated: #18181c;
+  --bg-header: rgba(9, 9, 11, 0.82);
+  --text-primary: #f4f4f0;
+  --text-secondary: #a1a19a;
+  --text-muted: #6e6e68;
+  --accent: #c8a97e;
+  --accent-strong: #d8be98;
+  --accent-soft: rgba(200, 169, 126, 0.14);
+  --border-subtle: rgba(244, 244, 240, 0.08);
+  --border-strong: rgba(244, 244, 240, 0.16);
+  --skeleton-base: #121215;
+  --skeleton-highlight: #1d1d22;
+  color-scheme: dark;
+}
+
+[data-theme="light"] {
+  --bg-primary: #faf9f6;
+  --bg-surface: #f1efe9;
+  --bg-elevated: #ffffff;
+  --bg-header: rgba(250, 249, 246, 0.86);
+  --text-primary: #141413;
+  --text-secondary: #5c5b56;
+  --text-muted: #8a8982;
+  --accent: #9a7b4f;
+  --accent-strong: #7d613a;
+  --accent-soft: rgba(154, 123, 79, 0.12);
+  --border-subtle: rgba(20, 20, 19, 0.08);
+  --border-strong: rgba(20, 20, 19, 0.18);
+  --skeleton-base: #eeece5;
+  --skeleton-highlight: #e3e0d7;
+  color-scheme: light;
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  transition:
+    background-color 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+    color 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+  overflow-x: hidden;
+}
+
+::selection {
+  background-color: rgba(200, 169, 126, 0.28);
+  color: var(--text-primary);
+}
+
+@keyframes gallery-shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.skeleton-shimmer {
+  background: linear-gradient(
+    90deg,
+    var(--skeleton-base) 25%,
+    var(--skeleton-highlight) 50%,
+    var(--skeleton-base) 75%
+  );
+  background-size: 200% 100%;
+  animation: gallery-shimmer 1.8s infinite linear;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .skeleton-shimmer {
+    animation: none;
+  }
+}
