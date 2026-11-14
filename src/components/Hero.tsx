@@ -3,11 +3,61 @@ import { ArrowDown, Expand } from "lucide-react";
 import { PORTFOLIO_CONFIG } from "../config/portfolio";
 import type { Photo } from "../types/photo";
 import { formatHoverSpecs } from "../utils/exif";
+import { BoudoirAudioButton } from "./BoudoirAudioButton";
 
 interface HeroProps {
   heroPhoto?: Photo;
   isLoading: boolean;
   onInspectHero: (photo: Photo) => void;
+}
+
+function HeroEditorial({ variant }: { variant: "portrait" | "landscape" }) {
+  const isPortrait = variant === "portrait";
+
+  return (
+    <>
+      <div className="mb-5 flex items-center gap-3.5">
+        <span className="h-px w-8 bg-[#C8A97E]" aria-hidden="true" />
+        <span className="text-[11px] uppercase tracking-[0.28em] text-[#C8A97E]">
+          {PORTFOLIO_CONFIG.heroEyebrow}
+        </span>
+      </div>
+
+      <h1
+        className={`font-serif text-4xl font-light leading-[1.06] tracking-[-0.01em] text-[#F4F4F0] sm:text-6xl ${
+          isPortrait ? "lg:text-[4.25rem]" : "lg:text-7xl"
+        }`}
+      >
+        {PORTFOLIO_CONFIG.heroHeadlinePrefix}{" "}
+        <span
+          className={`block italic text-[#C8A97E] ${
+            isPortrait ? "" : "sm:inline"
+          }`}
+        >
+          {PORTFOLIO_CONFIG.heroHeadlineHighlight}
+        </span>
+      </h1>
+
+      <p className="mt-5 max-w-lg text-sm font-light leading-relaxed text-[#F4F4F0]/78 sm:text-base">
+        {PORTFOLIO_CONFIG.heroDescription}
+      </p>
+
+      <div className="mt-8 flex flex-wrap items-center gap-4">
+        <a
+          href="#galerie"
+          className="group inline-flex items-center gap-3 rounded-full border border-[#C8A97E]/60 bg-[#09090B]/60 px-6 py-3 text-xs uppercase tracking-[0.22em] text-[#F4F4F0] backdrop-blur-sm transition-all duration-300 hover:border-[#C8A97E] hover:bg-[#C8A97E] hover:text-[#09090B]"
+        >
+          <span>{PORTFOLIO_CONFIG.heroCtaLabel}</span>
+          <ArrowDown
+            className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-y-0.5"
+            aria-hidden="true"
+          />
+        </a>
+
+        <BoudoirAudioButton />
+      </div>
+    </>
+  );
 }
 
 export function Hero({ heroPhoto, isLoading, onInspectHero }: HeroProps) {
@@ -81,36 +131,7 @@ export function Hero({ heroPhoto, isLoading, onInspectHero }: HeroProps) {
         <div className="relative z-10 mx-auto grid w-full max-w-[1440px] items-center gap-10 px-5 sm:px-10 lg:grid-cols-12 lg:gap-14">
           {/* Colonne texte éditorial */}
           <div className="order-2 lg:order-1 lg:col-span-6">
-            <div className="mb-5 flex items-center gap-3.5">
-              <span className="h-px w-8 bg-[#C8A97E]" aria-hidden="true" />
-              <span className="text-[11px] uppercase tracking-[0.28em] text-[#C8A97E]">
-                {PORTFOLIO_CONFIG.heroEyebrow}
-              </span>
-            </div>
-
-            <h1 className="font-serif text-4xl font-light leading-[1.06] tracking-[-0.01em] text-[#F4F4F0] sm:text-6xl lg:text-[4.25rem]">
-              {PORTFOLIO_CONFIG.heroHeadlinePrefix}{" "}
-              <span className="block italic text-[#C8A97E]">
-                {PORTFOLIO_CONFIG.heroHeadlineHighlight}
-              </span>
-            </h1>
-
-            <p className="mt-5 max-w-lg text-sm font-light leading-relaxed text-[#F4F4F0]/78 sm:text-base">
-              {PORTFOLIO_CONFIG.heroDescription}
-            </p>
-
-            <div className="mt-8 flex flex-wrap items-center gap-5">
-              <a
-                href="#galerie"
-                className="group inline-flex items-center gap-3 rounded-full border border-[#C8A97E]/60 bg-[#09090B]/60 px-6 py-3 text-xs uppercase tracking-[0.22em] text-[#F4F4F0] backdrop-blur-sm transition-all duration-300 hover:border-[#C8A97E] hover:bg-[#C8A97E] hover:text-[#09090B]"
-              >
-                <span>{PORTFOLIO_CONFIG.heroCtaLabel}</span>
-                <ArrowDown
-                  className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-y-0.5"
-                  aria-hidden="true"
-                />
-              </a>
-            </div>
+            <HeroEditorial variant="portrait" />
           </div>
 
           {/* Colonne œuvre portrait intégrale sans rognage */}
@@ -240,36 +261,7 @@ export function Hero({ heroPhoto, isLoading, onInspectHero }: HeroProps) {
       {/* Contenu éditorial du Hero */}
       <div className="relative z-10 mx-auto flex w-full max-w-[1440px] flex-col justify-between gap-8 px-5 pb-14 pt-32 sm:px-10 sm:pb-20 lg:flex-row lg:items-end">
         <div className="max-w-2xl">
-          <div className="mb-5 flex items-center gap-3.5">
-            <span className="h-px w-8 bg-[#C8A97E]" aria-hidden="true" />
-            <span className="text-[11px] uppercase tracking-[0.28em] text-[#C8A97E]">
-              {PORTFOLIO_CONFIG.heroEyebrow}
-            </span>
-          </div>
-
-          <h1 className="font-serif text-4xl font-light leading-[1.06] tracking-[-0.01em] text-[#F4F4F0] sm:text-6xl lg:text-7xl">
-            {PORTFOLIO_CONFIG.heroHeadlinePrefix}{" "}
-            <span className="block italic text-[#C8A97E] sm:inline">
-              {PORTFOLIO_CONFIG.heroHeadlineHighlight}
-            </span>
-          </h1>
-
-          <p className="mt-5 max-w-lg text-sm font-light leading-relaxed text-[#F4F4F0]/78 sm:text-base">
-            {PORTFOLIO_CONFIG.heroDescription}
-          </p>
-
-          <div className="mt-8 flex flex-wrap items-center gap-5">
-            <a
-              href="#galerie"
-              className="group inline-flex items-center gap-3 rounded-full border border-[#C8A97E]/60 bg-[#09090B]/55 px-6 py-3 text-xs uppercase tracking-[0.22em] text-[#F4F4F0] backdrop-blur-sm transition-all duration-300 hover:border-[#C8A97E] hover:bg-[#C8A97E] hover:text-[#09090B]"
-            >
-              <span>{PORTFOLIO_CONFIG.heroCtaLabel}</span>
-              <ArrowDown
-                className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-y-0.5"
-                aria-hidden="true"
-              />
-            </a>
-          </div>
+          <HeroEditorial variant="landscape" />
         </div>
 
         {/* Cartouche discret de l'œuvre en couverture */}
